@@ -3,7 +3,7 @@
 		{{#radios}}\
 		<div id="radio-{{id}}" class="radio {{#checked}}active{{/checked}}">{{&label}}</div>\
 		{{/radios}}\
-		<div class="radio-hidden" style="display:">{{&html}}</div>'
+		<div class="radio-hidden" style="display:none">{{&html}}</div>'
 
 	// var model = new Backbone.Model({
 	// 	checked: 'id',
