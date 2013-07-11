@@ -1,0 +1,72 @@
+ul,li{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.clearFix:after{
+	display: block;
+	content: "";
+	width: 0;
+	height: 0;
+	clear: both;
+}
+.wrapper{
+	width: 900px;
+	margin: 0 auto;
+}
+.tab_view {
+	margin: 5px;
+}
+.tab_nav {
+	position: relative;
+}
+.tab_nav li{
+	float: left;
+	margin-left: 5px;
+	padding: 0 10px;
+	display: block;
+	position: relative;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 4px 4px 0 0;
+	border-bottom: 1px solid #c9c9c9;
+	background: #f2f2f3;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#f2f2f3), to(#d9dbe2));
+	background: -webkit-linear-gradient(#f2f2f3, #d9dbe2);
+	background: -moz-linear-gradient(#f2f2f3, #d9dbe2);
+	background: -o-linear-gradient(#f2f2f3, #d9dbe2);
+	background: linear-gradient(#f2f2f3, #d9dbe2);
+	box-shadow: -2px 0 2px 1px #ccc;
+}
+.tab_nav li.active{
+	background: #f2f2f3;
+	border-bottom: 1px solid #f2f2f3;
+}
+.tab_nav li.hover{
+	background: #f2f2f3;
+	border-bottom: 1px solid #f2f2f3;
+}
+.tab_nav a {
+	text-decoration: none;
+	color: #666;
+	display: block;
+}
+.tab_con{
+	background-color: #eaebee;
+	padding: 5px;
+}
+.tab_con>.tab_pane{
+	display: none;
+	background-color: #fff;
+	padding: 5px;
+}
+.tab_con>.active{
+	display: block;
+}
+.tab_pane p{
+	text-indent: 2em;
+}
+li.add_tab{
+	float: right;
+	cursor: pointer;
+}
