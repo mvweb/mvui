@@ -1,0 +1,2 @@
+.radio-group div{cursor:pointer;float:left;margin-right:10px;text-indent:25px;background:url(./radio-bg.png) no-repeat 0 0;line-height: 20px}
+.radio-group div.active{float:left;margin-right:10px;text-indent:25px;background:url(./radio-bg.png) no-repeat 0 -50px}

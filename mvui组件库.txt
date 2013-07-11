@@ -1,0 +1,38 @@
+ui交互：
+
+模态弹出框（景昕）
+下拉菜单（小潘）
+标签页（贾硕）
+工具提示
+附加导航
+
+html控件增强：
+按钮
+radio组（特磊）
+checkbox组
+select（chosen类似）
+input(suggestion)
+
+数据展现控件：
+树
+table（分页，华呈）
+进度条
+
+
+其他：
+时间控件
+业务组件
+
+
+可以基于：jquery、underscore、backbone、(!mustache)
+
+要求：
+1.都可以通过html来初始化和使用。均拥有简单的默认模式，无需写一行js进行设置。
+2.组件会需要同dom交互，不能有循环引用，内存泄露
+3.统一命名空间：var mv = window.mv = window.mv || {}; 
+4...待讨论
+两种风格，一种是jquery插件风格，每个组件都是jquery的插件，都可以单独使用(bootstrap)。
+$("xxx").modal(opt);
+一种是其他正常风格：mv.ui.dialog , mv.ui.modal
+new mv.ui.modal(opt) 或者 mv.ui.create('modal', opt);
+我个人觉得，bootstrap的风格挺简单有效。或许可以综合一下。
