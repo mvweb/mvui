@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>mv grid test</title>
+	<link href="css/grid.mv.css" rel="stylesheet">
+	
+<script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+
+<script src="js/grid.mv.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function(){
+			var t = $('#mvTable').table({
+				url:'api.php',
+				labels:['ID','名称',function(k){
+					return "ID + 名称"+"<button>label btn</button>";
+				}],
+				models:[
+					'id',
+					{
+						name:'name',
+						sort:true,
+						emptyText:'@@empty@@'
+					},
+					function(i,item){
+						return i+item.name;
+					}
+				],
+				beforeRequest:function(){
+					//console.log('beforeRequest');
+				},
+				afterRequest:function(){
+					//console.log('afterRequest');	
+				},
+				afterSuccess:function(data){
+					//console.log('afterSuccess');	
+					//console.log(data);
+					
+				}
+			});
+			
+		});
+
+	</script>
+</head>
+<body>
+	<table id="mvTable"></table>
+	<button id="fetch">fetch</button><br />
+	<input type="text" id="searchText" />
+	<button id="search">search</button>
+	<script type="text/javascript">
+		$(function(){
+			$('#fetch').click(function(){
+				//$('#mvTable').table('fetch');
+				var table = $('#mvTable').data('table');
+					table.position(2,'name','xxx');
+			});
+			$('#search').click(function(){
+				$('#mvTable').table('search',$('#searchText').val());
+			});
+		});
+	</script>
+</body>
+</html>
