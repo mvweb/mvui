@@ -7,15 +7,24 @@
 !(function($){
 	"use strict";	
 	var Table = function(element,options){
-		this._items = [];
+	    this._useExternalData = false;
+	    if(Object.prototype.toString.call(options.dataSource) == '[object Array]'){
+	        this._items = options.dataSource;
+	        this._useExternalData = true;
+	    }else{
+	        this._items = [];
+	    }
+		
 		this._pagination = {};
 		this.$element = $(element);
    		this.options = $.extend({}, $.fn.table.defaults, options);
-   		this._renderHeader(this.options.labels);
-   		this.$element.addClass('table table-bordered');
    		this._init();
    		this._listen();
-   		this.fetch();   		
+   		if(!this._useExternalData){
+   		    this.fetch();
+   		}
+   		this.render();
+   		
 	};
 	Table.prototype = {	
 		_init:function(){
@@ -70,8 +79,8 @@
 					}else{
 						modelValue = this.options.emptyText;
 					}
-
-					bodyTemArr.push('<td mv-data-attr="'+modelAttr+'">'+modelValue+'</td>');
+                    modelValue = typeof modelValue == 'undefined'? this.options.emptyText : modelValue;
+					bodyTemArr.push('<td data-mv-attr="'+modelAttr+'">'+modelValue+'</td>');
 					
 				}
 				bodyTemArr.push('</tr>');
@@ -87,7 +96,7 @@
 			}
 		},
 		_renderFooter:function(pagination){
-			if(this.options.pagination){				
+			if(!this._useExternalData && this.options.pagination){				
 				var footStr;
 				if(typeof pagination.render == 'function'){
 					footStr = pagination.render(pagination);
@@ -123,11 +132,12 @@
 		position:function(row,col,data){
 			if(this._items[row]){
 				this._items[row][col] = data;
-				$('tbody').find('tr').eq(row).find('[mv-data-attr='+col+']').html(data);
+				$('tbody').find('tr').eq(row).find('[data-mv-attr='+col+']').html(data);
 			}
 		},
 		render:function(){
-			this._renderHeader();
+		    this.$element.addClass('table table-bordered');
+			this._renderHeader(this.options.labels);
 			this._renderBody(this._items,this.options.models,this.options.labels);
 			this._renderFooter(this._pagination);
 		},
@@ -178,14 +188,14 @@
 			this.fetch();
 		},
 		fetch:function(){	
-			
-			if(this.options.url){
+			var ajaxUrl = this.options.dataSource;
+			if(ajaxUrl){
 				var $this = this;
 				if(this.options.beforeRequest){
 					this.options.beforeRequest();
 				}
 				$.ajax({
-					'url':this.options.url,
+					'url':ajaxUrl,
 					type:'POST',
 					data:this.options.params,
 					dataType:this.options.dataType,
@@ -193,11 +203,13 @@
 						if(data.status == 0){
 							$this._items = data.data.items;
 							$this._pagination = data.data.pagination;
-							$this._renderBody(data.data.items,$this.options.models,$this.options.labels);						
-
-							if($this.options.hasFooter){
-								$this._renderFooter(data.data.pagination);
-							}
+							
+							// $this._renderBody(data.data.items,$this.options.models,$this.options.labels);						
+							// if($this.options.hasFooter){
+								// $this._renderFooter(data.data.pagination);
+							// }
+							
+							
 							if($this.options.afterSuccess){
 								$this.options.afterSuccess(data.data);
 							}	
@@ -210,23 +222,28 @@
 				}
 
 			}
+		},
+		dataSource:function(items){
+		    if(Object.prototype.toString.call(items) == '[object Array]'){
+		          this._items = items;    
+		    }
 		}
 	} 
 
-
+    
 	var old = $.fn.table;
 	$.fn.table = function(option,params){
 		 return this.each(function () {	 
-	      var $this = $(this)
-	        , data = $this.data('table')
-	        , options = typeof option == 'object' && option;
-
-	      if (!data) {
-	      		$this.data('table', (data = new Table(this, options)));
-	      }
-	      if (typeof option == 'string') {
-	      	data[option](params);
-	      }
+		      var $this = $(this)
+		        , data = $this.data('table')
+		        , options = typeof option == 'object' && option;
+	
+		      if (!data) {
+		      		$this.data('table', (data = new Table(this, options)));
+		      }
+		      if (typeof option == 'string') {
+		      		data[option](params);
+		      }
 	    });
 	}
 
@@ -237,7 +254,7 @@
 
   	$.fn.table.defaults = {
   		dataType:'json',
-  		url:false,
+  		dataSource:false,
   		params:{},
   		sort:{
   			'ascClass':'mvtable-sort_asc',

@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>Mv Table lib</title>
+	<link href="css/grid.mv.css" rel="stylesheet">
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+	<script src="js/grid.mv.js" type="text/javascript"></script>
+	<script type="text/javascript">
+        $(function(){
+        	var data = [{
+					'id':1,
+					'name':'whc'
+				},
+				{
+					'id':2,
+					'name':'whc'
+				}];
+        	var t1 = $('#mvTable1').table({
+				dataSource:data,
+				labels:['ID','名称'],
+				models:['id','name'],
+			});
+        	
+        	
+			// var t = $('#mvTable2').table({
+				// dataSource:'api.php',
+				// labels:['ID','名称',function(k){
+					// return "ID + 名称"+"<button>label btn</button>";
+				// }],
+				// models:[
+					// 'id',
+					// {
+						// name:'name',
+						// sort:true,
+						// emptyText:'@@empty@@'
+					// },
+					// function(i,item){
+						// return i+item.name;
+					// }
+				// ],
+			// });
+		});
+    </script>
+</head>
+<body>
+	<div id="doc">
+		初始化：
+		<pre>
+			&lt;table id="mvTable1"&gt;&lt;/table&gt;
+			 
+			$(selecter).table(config);
+			
+			config:json
+			
+			default Param:
+			{
+		  		dataType:'json',
+		  		dataSource:false, //[] 或者  ajax Url
+		  		params:{},		  // ajax 请求参数
+		  		sort:{
+		  			'ascClass':'mvtable-sort_asc',  //排序上箭头 class
+		  			'descClass':'mvtable-sort_desc',//排序下箭头 class
+		  			'bothClass':'mvtable-sort_both' //排序状态箭头 class
+		  		},
+		  		hasFooter:true,
+		  		pagination:{
+		  			config:{
+		  				page:1,
+		  				pagesize:10,
+		  			},
+		  			render:false
+		  		},
+		  		beforeRequest:false,
+		  		afterRequest:false,
+		  		labels:false,
+		  		models:false,
+		  		emptyText:'&nbsp;'
+		  	}
+			
+		</pre>
+	</div>
+	<div id="demo1">
+  	code:<hr />
+    <pre>
+    	data = [{
+					'id':1,
+					'name':'whc'
+				},
+				{
+					'id':2,
+					'name':'whc'
+				}];
+    	var t1 = $('#mvTable1').table({
+				dataSource:data,
+				labels:['ID','名称'],
+				models:['id','name'],
+			});
+    </pre>
+    <hr />
+   <table id="mvTable1"></table>
+  </div>
+  <div id="demo2">
+  	code:<hr />
+    <pre>
+    	$(function(){
+			var t = $('#mvTable2').table({
+				dataSource:'api.php',
+				labels:['ID','名称',function(k){
+					return "ID + 名称"+"&lt;button&gt;label btn&lt;/button&gt;";
+				}],
+				models:[
+					'id',
+					{
+						name:'name',
+						sort:true,
+						emptyText:'@@empty@@'
+					},
+					function(i,item){
+						return i+item.name;
+					}
+				],
+			);
+    </pre>
+    <hr />
+    <table id="mvTable2"></table>
+  </div>
+</body>
+</html>
