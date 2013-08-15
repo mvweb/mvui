@@ -1,4 +1,4 @@
-mv-tabs.js
+mv-tips.js
 ==========
 
 Examples
