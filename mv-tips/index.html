@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="mv-tips.css">
+	<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="mv-tips.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<h1 id="mv-tipsjs">mv-tips.js demos</h1>
+		<ul class="tipcon">
+			<li><a href="#" data-toggle="mv-tips" data-placement="top" data-title="top tip" id="top">mv-tips top</a></li>
+			<li><a href="#" data-toggle="mv-tips" data-placement="right" data-title="right tip" id="right">mv-tips right</a></li>
+			<li><a href="#" data-toggle="mv-tips" data-placement="bottom" data-title="bottom tip" id="bottom">mv-tips bottom</a></li>
+			<li><a href="#" data-toggle="mv-tips" data-placement="left" data-title="left tip" id="left">mv-tips left</a></li>
+			<li><input type="text" data-toggle="mv-tips" data-placement="right" data-title="请输入数字" data-trigger="focus"></li>
+		</ul>
+	</div>
+</body>
+<script>
+
+	$('#top').on('show', function (e) {
+		console.log(this.id, e.type);
+		// e.preventDefault()
+	})
+	$('#right').on('shown', function (e) {
+		console.log(this.id, e.type);
+	})
+	$('#bottom').on('hide', function (e) {
+		console.log(this.id, e.type);
+		// e.preventDefault()
+	})
+	$('#left').on('hidden', function (e) {
+		console.log(this.id, e.type);
+	})
+</script>
+</html>
