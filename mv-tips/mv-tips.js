@@ -8,7 +8,7 @@
 
 	Tip.DEFAULT = {
 		placement: 'bottom',
-		title: 'mv-tips',
+		title: 'mv-tips:忘了写内容了？',
 		template: '<div class="tip"><div class="tip-arrow"></div><div class="tip-inner"></div></div>',
 		trigger: 'hover',
 	};
