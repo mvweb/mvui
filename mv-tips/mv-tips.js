@@ -84,7 +84,7 @@
 
 		destroy: function () {
 			this.tip.remove();
-			this.onshow = false;
+			$(this.element).off('.tip').removeData('mv.tip');
 		},
 
 		setPos: function (pos) {
